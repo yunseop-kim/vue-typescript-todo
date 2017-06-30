@@ -3,11 +3,6 @@ import Component from 'vue-class-component';
 // import axios, {AxiosResponse} from 'axios';
 import { firebaseDB, firebaseAuth } from '../../firebase/config';
 
-interface UserResponse {
-    id: string;
-    name: string;
-}
-
 @Component({
     template: require('./list.html')
 })
@@ -17,8 +12,6 @@ export class ListComponent extends Vue {
     newComment: string = '';
     private url = 'https://jsonplaceholder.typicode.com/users';
     protected commentsRef = firebaseDB.ref('Comments');
-
-
 
     constructor() {
         super();
@@ -42,26 +35,18 @@ export class ListComponent extends Vue {
     }
 
     addComments() {
-        firebaseAuth.onAuthStateChanged((user) => {
-            if (user) {
-                let value = this.newComment && this.newComment.trim();
-                if (!value) {
-                    return;
-                }
+        let value = this.newComment && this.newComment.trim();
+        if (!value) {
+            return;
+        }
 
-                this.commentsRef.push({
-                    uid: firebaseAuth.currentUser.uid,
-                    message: value,
-                    sendtime: this.formatDate(new Date())
-                });
-
-                this.newComment = '';
-            }
-            else {
-                alert("로그인 해주세요.");
-                location.href = '/#/login';
-            }
+        this.commentsRef.push({
+            uid: firebaseAuth.currentUser.uid,
+            message: value,
+            sendtime: this.formatDate(new Date())
         });
+
+        this.newComment = '';
     }
 
     private loadItems() {
