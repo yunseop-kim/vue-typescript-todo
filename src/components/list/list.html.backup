@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="message" class="col-sm-2 control-label">Comments</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="4" name="message" v-model="newComment"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button @click="addComments" type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <! Will be used to display an alert to the user>
+            </div>
+        </div>
+    </div>
+    <!-- Contenedor Principal -->
+    <div class="comments-container">
+        <h1>방명록</h1>
+
+        <ul id="comments-list" class="comments-list">
+            <li v-for="item in items" :key="item['.key']">
+                <div class="comment-main-level">
+                    <!-- Avatar -->
+                    <div class="comment-avatar"><img :src="item.writer.photo" alt=""></div>
+                    <!-- Contenedor del Comentario -->
+                    <div class="comment-box">
+                        <div class="comment-head">
+                            <h6 class="comment-name">
+                                {{item.writer.username}}
+                            </h6>
+                            <span>{{item.sendtime}}</span>
+                            <i v-on:click="removeComments(item)" class="fa fa-times"></i>
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <div class="comment-content">
+                            {{item.message}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

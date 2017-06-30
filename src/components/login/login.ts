@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Logger } from '../../util/log';
+import {firebaseAuth, firebaseDB} from '../../firebase/config';
 import * as firebase from 'firebase';
-
 @Component({
   template: require('./login.html')
 })
@@ -16,20 +16,25 @@ export class LoginComponent extends Vue {
 
   googleAuth() {
     console.log('googleAuth > start');
-    firebase.auth().getRedirectResult().then((result) => {
+    firebaseAuth.getRedirectResult().then((result) => {
       if (result.credential) {
         // This gives you a Google Access Token.
         let token = result.credential.accessToken;
+        firebaseDB.ref('Users/' + firebaseAuth.currentUser.uid).update({
+          username: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL
+        });
       }
       let user = result.user;
-      location.href = '/';
     });
 
     // Start a sign in process for an unauthenticated user.
     let provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    firebase.auth().signInWithRedirect(provider);
+    firebaseAuth.signInWithRedirect(provider);
+    this.$router.push('/');
   }
 
   facebookAuth() {

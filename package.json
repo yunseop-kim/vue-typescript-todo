@@ -28,7 +28,8 @@
     "vue": "~2.2.4",
     "vue-class-component": "~5.0.0",
     "vue-property-decorator": "^4.0.0",
-    "vue-router": "~2.3.0"
+    "vue-router": "~2.3.0",
+    "vuefire": "^1.4.3"
   },
   "devDependencies": {
     "@types/node": "~7.0.8",

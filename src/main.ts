@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 
 import { HomeComponent } from './components/home';
 import { LoginComponent } from './components/login';
-import { LogoutComponent } from './components/logout';
 import { ListComponent } from './components/list';
 import { NavbarComponent } from './components/navbar';
 import {firebaseAuth} from './firebase/config';

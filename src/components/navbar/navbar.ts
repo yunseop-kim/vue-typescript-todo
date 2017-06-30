@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { Component, watch } from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
-
+import { firebaseAuth } from '../../firebase/config';
 @Component({
     template: require('./navbar.html')
 })
@@ -24,9 +24,10 @@ export class NavbarComponent extends Vue {
     pathChanged() {
         this.logger.info('Changed current path to: ' + this.$route.path);
     }
-
+    
     mounted() {
         if (!this.logger) this.logger = new Logger();
         this.$nextTick(() => this.logger.info(this.object.default));
     }
+
 }
