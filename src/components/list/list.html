@@ -1,62 +1,66 @@
-<div id="app" class="container">
-    <div class="page-header">
-        <h1>Vue.js 2 & Realtime Database with Firebase</h1>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Add Book</h3>
-      </div>
-      <div class="panel-body">
-        <form id="form" class="form-inline" v-on:submit.prevent="addBook">
-          <div class="form-group">
-            <label for="bookTitle">Title:</label>
-            <input type="text" id="bookTitle" class="form-control" v-model="newBook.title">
-          </div>
-          <div class="form-group">
-            <label for="bookAuthor">Author:</label>
-            <input type="text" id="bookAuthor" class="form-control" v-model="newBook.author">
-          </div>
-          <div class="form-group">
-            <label for="bookUrl">URL:</label>
-            <input type="text" id="bookUrl" class="form-control" v-model="newBook.url">
-          </div>
-          <input type="hidden" id="bookKey">
-            <input type="submit" class="btn btn-primary" value="Add Book">
-            <input type="button" id="btnUp" class="btn btn-primary" value="Update Book" v-on:click="updatebtn()" disabled>
-        </form>
+<div class="container">
+  <div class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="message" class="col-sm-2 control-label">Comments</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" rows="4" name="message" v-model="newComment"></textarea>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Books Lists</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-striped">
-          <thead class="thead-inverse">
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="book in books">
-              <td>
-                <a v-bind:href="book.url">{{ book.title }}</a>
-              </td>
-              <td>{{ book.author }}</td>
-              <td>
-                <span class="glyphicon glyphicon-pencil" v-on:click="updateBook(book)"><span>
-              </td>
-              <td>
-                <span class="glyphicon glyphicon-trash" v-on:click="removeBook(book)"><span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <button @click="addComments" class="btn btn-primary">Send</button>
+        <button @click="add1000Comments" class="btn btn-primary">add1000Comments</button>
       </div>
     </div>
-
-
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <! Will be used to display an alert to the user>
+      </div>
+    </div>
   </div>
+  <!-- Contenedor Principal -->
+  <div class="comments-container">
+    <h1>방명록</h1>
+
+    <ul id="comments-list" class="comments-list">
+      <li v-for="(item, key) in items" :key="item['.key']">
+        <div class="comment-main-level">
+          <!-- Avatar -->
+          <div class="comment-avatar"><img :src="item.writer.photo" alt=""></div>
+          <!-- Contenedor del Comentario -->
+          <div class="comment-box">
+            <div class="comment-head">
+              <h6 class="comment-name">
+                {{item.writer.username}}
+              </h6>
+              <span>{{item.sendtime}}</span>
+              <i v-on:click="removeComments(key)" class="fa fa-times"></i>
+              <i @click="openModifyModal(key, item)" class="fa fa-pencil"></i>
+            </div>
+            <div class="comment-content">
+              {{item.message}}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <comment-modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <h3 slot="header">수정</h3>
+    <div slot="body">
+      <textarea class="form-control" rows="4" name="message" v-model="selectedItem.message"></textarea>
+    </div>
+    <div slot="footer">
+      <button @click="submitModifyModal()">
+        OK
+      </button>
+      <button @click="closeModifyModal()">
+        Cancel
+      </button>
+    </div>
+  </comment-modal>
+</div>

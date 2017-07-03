@@ -6,11 +6,12 @@ import { LoginComponent } from './components/login';
 import { ListComponent } from './components/list';
 import { NavbarComponent } from './components/navbar';
 import {firebaseAuth} from './firebase/config';
+import * as firebase from 'firebase';
 // register the plugin
 Vue.use(VueRouter);
 
 function requireAuth (to, from, next) {
-  if (!firebaseAuth.currentUser) {
+  if (!firebase.auth().currentUser) {
     next({
       path: '/login',
       query: { redirect: to.fullPath }

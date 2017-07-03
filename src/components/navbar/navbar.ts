@@ -1,33 +1,31 @@
-import Vue from 'vue';
-import { Component, watch } from 'vue-property-decorator';
-import { Link } from './link';
-import { Logger } from '../../util/log';
-import { firebaseAuth } from '../../firebase/config';
+import Vue from "vue";
+import { Component, watch } from "vue-property-decorator";
+import { Link } from "./link";
+import { Logger } from "../../util/log";
+import { firebaseAuth } from "../../firebase/config";
 @Component({
-    template: require('./navbar.html')
+  template: require("./navbar.html")
 })
 export class NavbarComponent extends Vue {
+  protected logger: Logger;
 
-    protected logger: Logger;
+  inverted: boolean = true; // default value
 
-    inverted: boolean = true; // default value
+  object: { default: string } = { default: "Default object property!" }; // objects as default values don't need to be wrapped into functions
 
-    object: { default: string } = { default: 'Default object property!' }; // objects as default values don't need to be wrapped into functions
+  links: Link[] = [
+    new Link("Home", "/"),
+    new Link("List", "/list"),
+    new Link("Login", "/login")
+  ];
 
-    links: Link[] = [
-        new Link('Home', '/'),
-        new Link('List', '/list'),
-        new Link('Login', '/login'),
-    ];
+  @watch("$route.path")
+  pathChanged() {
+    this.logger.info("Changed current path to: " + this.$route.path);
+  }
 
-    @watch('$route.path')
-    pathChanged() {
-        this.logger.info('Changed current path to: ' + this.$route.path);
-    }
-    
-    mounted() {
-        if (!this.logger) this.logger = new Logger();
-        this.$nextTick(() => this.logger.info(this.object.default));
-    }
-
+  mounted() {
+    if (!this.logger) this.logger = new Logger();
+    this.$nextTick(() => this.logger.info(this.object.default));
+  }
 }
