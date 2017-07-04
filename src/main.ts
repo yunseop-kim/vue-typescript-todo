@@ -1,48 +1,16 @@
-import * as Vue from 'vue';
-import VueRouter from 'vue-router';
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-import { HomeComponent } from './components/home';
-import { LoginComponent } from './components/login';
-import { ListComponent } from './components/list';
-import { NavbarComponent } from './components/navbar';
-import {firebaseAuth} from './firebase/config';
-import * as firebase from 'firebase';
-// register the plugin
-Vue.use(VueRouter);
+Vue.config.productionTip = false;
 
-function requireAuth (to, from, next) {
-  if (!firebase.auth().currentUser) {
-    next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    });
-  } else {
-    next();
-  }
-}
-
-let router = new VueRouter({
-  routes: [
-    { path: '/', component: HomeComponent },
-    { path: '/list', component: ListComponent, beforeEnter: requireAuth },
-    { path: '/login', component: LoginComponent },
-    { path: '/logout',
-      beforeEnter (to, from, next) {
-        firebaseAuth.signOut().then(() => {
-            console.log('logout');
-        }).catch((error) => {
-            console.error('error: ', error);
-        });
-        next('/');
-      }
-    },
-  ]
-});
-
+/* eslint-disable no-new */
 new Vue({
-  el: '#app-main',
-  router: router,
-  components: {
-    'navbar': NavbarComponent
-  }
+  el: "#app",
+  router,
+  render: (h) => h(App)
+  // template: "<App/>",
+  // components: { App }
 });

@@ -1,12 +1,24 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "es5", "es2015", "es2015.promise"],
-    "module": "es2015",
+    "module": "es6",
     "moduleResolution": "node",
     "target": "es5",
-    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2015.promise",
+      "es6"
+    ],
+    "types": [
+      "vue-typescript-import-dts",
+      "reflect-metadata"
+    ],
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compileOnSave": false
 }
