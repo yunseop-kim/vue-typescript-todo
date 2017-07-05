@@ -1,16 +1,16 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import Modal from "../components/modal.vue";
+import Modal from "../typescripts/modal";
 // import axios, {AxiosResponse} from 'axios';
 import { firebaseDB, firebaseAuth } from "../firebase";
 
 @Component({
-//   template: require("./list.pug"),
+  template: require("../pugs/list.pug"),
   components: {
     Modal
   }
 })
-export class ListComponent extends Vue {
+export default class ListComponent extends Vue {
   items: any[] = [];
   newComment: string = "";
   showModal: boolean = false;

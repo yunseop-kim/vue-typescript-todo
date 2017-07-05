@@ -1,15 +1,14 @@
 import Vue from "vue";
-// import Component from "vue-class-component";
+import Component from "vue-class-component";
 import { firebaseAuth, firebaseDB } from "../firebase";
 import * as firebase from "firebase";
-// @Component({
-//   template: require("./login.pug")
-// })
-export class LoginComponent extends Vue {
+@Component({
+  template: require("../pugs/login.pug")
+})
+export default class LoginComponent extends Vue {
   mounted() {
-    console.log("hoho");
     this.$nextTick(() => console.log("login is ready!"));
-  } 
+  }
 
   googleAuth(): void {
     console.log("googleAuth > start");

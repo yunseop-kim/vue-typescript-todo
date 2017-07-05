@@ -1,27 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeComponent from "@/components/home.vue";
-import LoginComponent from "../components/login.vue";
-import ListComponent from "../components/list.vue";
+import LoginComponent from "@/components/login.vue";
+import ListComponent from "@/components/list.vue";
 import { firebaseAuth } from "../firebase";
 import * as firebase from "firebase";
 Vue.use(Router);
-function requireAuth(to, from, next) {
-    if (!firebase.auth().currentUser) {
-        next({
-            path: "/login",
-            query: { redirect: to.fullPath }
-        });
-    }
-    else {
-        next();
-    }
-}
-export default new Router({
+var router = new Router({
     routes: [
         { path: "/", component: HomeComponent },
-        { path: "/login", component: LoginComponent },
         { path: "/list", component: ListComponent, beforeEnter: requireAuth },
+        { path: "/login", component: LoginComponent },
         {
             path: "/logout",
             beforeEnter: function (to, from, next) {
@@ -38,3 +27,13 @@ export default new Router({
         }
     ]
 });
+function requireAuth(to, from, next) {
+    if (!firebase.auth().currentUser) {
+        router.push({
+            path: "/login"
+        });
+    }
+    else {
+    }
+}
+export default router;

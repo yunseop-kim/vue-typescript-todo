@@ -1,10 +1,4 @@
-<template lang="pug" src="../pugs/modal.pug"></template>
-
-<script lang="ts">
-import { Modal } from "../typescripts/modal";
-export default Modal;
-</script>
+<script lang="ts" src="../typescripts/modal"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../css/modal.css">
-</style>
+<style scoped src="../css/modal.css"></style>

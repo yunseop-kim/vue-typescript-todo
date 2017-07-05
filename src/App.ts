@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import NavbarComponent from "./components/navbar.vue";
+import NavbarComponent from "./typescripts/navbar";
 
 @Component({
   name: "App",

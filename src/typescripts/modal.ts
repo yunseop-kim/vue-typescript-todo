@@ -1,11 +1,8 @@
 import Vue from "vue";
-// import Component from "vue-class-component";
+import Component from "vue-class-component";
 
-// @Component({
-//   template: require("./modal.pug")
-// })
-export class Modal extends Vue {
-    created(){
-        console.log("This is modal: ", this.$route.path);
-    }
+@Component({
+  template: require("../pugs/modal.pug")
+})
+export default class Modal extends Vue {
 }

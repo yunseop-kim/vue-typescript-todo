@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
@@ -11,8 +11,10 @@
     ],
     "types": [
       "vue-typescript-import-dts",
-      "reflect-metadata"
+      "reflect-metadata",
+       "node"
     ],
+    "typeRoots": [ "./node_modules/@types" ],
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true

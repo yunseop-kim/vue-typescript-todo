@@ -3,10 +3,10 @@ import Component from "vue-class-component";
 import { firebaseApp } from "../firebase";
 import * as firebase from "firebase";
 @Component({
-  // template: require("./home.pug")
+  template: require("../pugs/home.pug"),
   name: "vue-home"
 })
-export class HomeComponent extends Vue {
+export default class HomeComponent extends Vue {
   username: string = null;
 
   beforeMount() {
@@ -17,7 +17,6 @@ export class HomeComponent extends Vue {
         this.username = user.displayName;
       } else {
         // No user is signed in.
-        console.log("hello");
       }
     });
   }

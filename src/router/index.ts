@@ -9,6 +9,15 @@ import * as firebase from "firebase";
 
 Vue.use(Router);
 
+function requireAuth(to, from, next) {
+  if (!firebase.auth().currentUser) {
+    next({
+      path: "/login"
+    });
+  } else {
+  }
+}
+
 const router = new Router({
   routes: [
     { path: "/", component: HomeComponent },
@@ -30,16 +39,5 @@ const router = new Router({
     }
   ]
 });
-
-
-function requireAuth(to, from, next) {
-  if (!firebase.auth().currentUser) {
-    router.push({
-      path: "/login",
-      query: { redirect: to.fullPath }
-    });
-  } else {
-  }
-}
 
 export default router;
