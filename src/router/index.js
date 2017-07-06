@@ -34,6 +34,7 @@ function requireAuth(to, from, next) {
         });
     }
     else {
+      next()
     }
 }
 export default router;
