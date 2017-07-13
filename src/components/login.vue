@@ -1,4 +1,53 @@
-<script lang="ts" src="../typescripts/login"></script>
+<<<<<<< .merge_file_BZxISP
+<template>
+  <div>
+    <h2>Login</h2>
+    <p v-if="$route.query.redirect">
+      You need to login first.
+    </p>
+    <form @submit.prevent="login">
+      <label>
+        <input v-model="email" placeholder="email">
+      </label>
+      <label>
+        <input v-model="pass" placeholder="password" type="password">
+      </label> (hint: password1)
+      <br>
+      <button type="submit">login</button>
+      <p v-if="error" class="error">Bad login information</p>
+    </form>
+  </div>
+</template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../css/login.css" scoped></style>
+<script lang="ts">
+import Vue from 'vue'
+import auth from '../router/auth'
+import { Component } from 'vue-property-decorator'
+
+@Component
+export default class Login extends Vue {
+  email: string = 'joe@example.com';
+  pass: string = '';
+  error: boolean = false;
+
+  login() {
+    auth.login(this.email, this.pass, loggedIn => {
+      if (!loggedIn) {
+        this.error = true
+      } else {
+        this.$router.replace(this.$route.query.redirect || '/')
+      }
+    });
+  }
+
+}
+</script>
+=======
+<script lang="ts" src="../typescripts/login"></script>
+>>>>>>> .merge_file_JAfkNN
+
+<style>
+.error {
+  color: red
+}
+</style>
