@@ -8,6 +8,7 @@ import App from '../App.vue'
 import About from '../components/About.vue'
 import Dashboard from '../components/Dashboard.vue'
 import Login from '../components/Login.vue'
+import List from '../components/List.vue'
 
 Vue.use(Router)
 
@@ -40,13 +41,9 @@ export default new Router({
     }
   },
   routes: [
-
-    // { path: '/', component: Hello }, // No props, no nothing
-    // { path: '/hello/:name', component: Hello, props: true }, // Pass route.params to props
-    // { path: '/static', component: Hello, props: { name: 'world' } }, // static values
-    // { path: '/dynamic/:years', component: Hello, props: dynamicPropsFn } // custom logic for mapping between route and props
     { path: '/about', component: About },
     { path: '/dashboard', component: Dashboard, beforeEnter: requireAuth },
+    { path: "/list", component: List, beforeEnter: requireAuth },
     { path: '/login', component: Login },
     { path: '/logout',
       beforeEnter (to, from, next) {
