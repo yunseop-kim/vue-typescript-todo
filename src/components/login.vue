@@ -1,4 +1,3 @@
-<<<<<<< .merge_file_BZxISP
 <template>
   <div>
     <h2>Login</h2>
@@ -42,9 +41,6 @@ export default class Login extends Vue {
 
 }
 </script>
-=======
-<script lang="ts" src="../typescripts/login"></script>
->>>>>>> .merge_file_JAfkNN
 
 <style>
 .error {

@@ -9,7 +9,6 @@ import About from '../components/About.vue'
 import Dashboard from '../components/Dashboard.vue'
 import Login from '../components/Login.vue'
 
-<<<<<<< .merge_file_Pbk65k
 Vue.use(Router)
 
 function dynamicPropsFn(route) {
@@ -57,39 +56,3 @@ export default new Router({
     }
   ]
 })
-=======
-Vue.use(Router);
-
-function requireAuth(to, from, next) {
-  if (!firebase.auth().currentUser) {
-    next({
-      path: "/login"
-    });
-  } else {
-  }
-}
-
-const router = new Router({
-  routes: [
-    { path: "/", component: HomeComponent },
-    { path: "/list", component: ListComponent, beforeEnter: requireAuth },
-    { path: "/login", component: LoginComponent },
-    {
-      path: "/logout",
-      beforeEnter(to, from, next) {
-        firebaseAuth
-          .signOut()
-          .then(() => {
-            console.log("logout");
-          })
-          .catch(error => {
-            console.error("error: ", error);
-          });
-        next("/");
-      }
-    }
-  ]
-});
-
-export default router;
->>>>>>> .merge_file_CIAbyB

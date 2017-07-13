@@ -1,5 +1,4 @@
 {
-<<<<<<< .merge_file_GcQLtF
     "compilerOptions": {
         "target": "es5",
         "allowSyntheticDefaultImports": true,
@@ -13,30 +12,3 @@
 	    "./src/main.ts"
 	]
 }
-=======
-  "compilerOptions": {
-    "module": "es2015",
-    "moduleResolution": "node",
-    "target": "es5",
-    "lib": [
-      "dom",
-      "es2015",
-      "es2015.promise",
-      "es6"
-    ],
-    "types": [
-      "vue-typescript-import-dts",
-      "reflect-metadata",
-       "node"
-    ],
-    "typeRoots": [ "./node_modules/@types" ],
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "compileOnSave": false
-}
->>>>>>> .merge_file_nzjD3r
