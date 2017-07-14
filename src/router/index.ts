@@ -12,13 +12,6 @@ import List from '../components/List.vue'
 
 Vue.use(Router)
 
-function dynamicPropsFn(route) {
-  const now = new Date()
-  return {
-    name: (now.getFullYear() + parseInt(route.params.years)) + '!'
-  }
-}
-
 function requireAuth (to, from, next) {
   if (!auth.loggedIn()) {
     next({
@@ -47,7 +40,7 @@ export default new Router({
     { path: '/login', component: Login },
     { path: '/logout',
       beforeEnter (to, from, next) {
-        auth.logout()
+        auth.signOut()
         next('/')
       }
     }

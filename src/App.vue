@@ -23,6 +23,9 @@
               <router-link to="/dashboard">Dashboard</router-link>
             </li>
             <li>
+              <router-link to="/list">List</router-link>
+            </li>
+            <li>
               <router-link v-if="loggedIn" to="/logout">Log out</router-link>
               <router-link v-if="!loggedIn" to="/login">Log in</router-link>
             </li>

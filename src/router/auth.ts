@@ -1,51 +1,38 @@
 /* globals localStorage */
+import { firebaseAuth } from "../firebase";
+
+let currentUser;
 
 export default {
-  login (email, pass, cb) {
-    cb = arguments[arguments.length - 1]
-    if (localStorage.token) {
-      if (cb) cb(true)
-      this.onChange(true)
-      return
-    }
-    pretendRequest(email, pass, (res) => {
-      if (res.authenticated) {
-        localStorage.token = res.token
-        if (cb) cb(true)
-        this.onChange(true)
+  getUser(): void {
+    firebaseAuth.onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        currentUser = user;
+        this.onChange(true);
       } else {
-        if (cb) cb(false)
-        this.onChange(false)
+        // No user is signed in.
       }
-    })
+    });
   },
 
-  getToken () {
-    return localStorage.token
+  signOut(): void {
+    firebaseAuth.signOut().then(
+      () => {
+        console.log("logout success");
+        currentUser = null;
+        this.onChange(false);
+      },
+      error => {
+        console.log("logout failed!:", error);
+      }
+    );
   },
 
-  logout (cb?: any) {
-    delete localStorage.token
-    if (cb) cb()
-    this.onChange(false)
+  loggedIn(): boolean {
+    this.getUser();
+    return !!currentUser;
   },
 
-  loggedIn () {
-    return !!localStorage.token
-  },
-
-  onChange (result: boolean) {}
-}
-
-function pretendRequest (email, pass, cb) {
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
-      cb({
-        authenticated: true,
-        token: Math.random().toString(36).substring(7)
-      })
-    } else {
-      cb({ authenticated: false })
-    }
-  }, 0)
-}
+  onChange(result: boolean) {}
+};

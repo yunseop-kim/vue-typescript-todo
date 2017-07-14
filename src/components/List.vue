@@ -424,7 +424,7 @@ body {
     color: #999;
     font-size: 13px;
     position: relative;
-    top: 1px;
+    top: 8px;
 }
 
 .comment-box .comment-content {

@@ -69,15 +69,15 @@ export default class Login extends Vue {
   pass: string = '';
   error: boolean = false;
 
-  login() {
-    auth.login(this.email, this.pass, loggedIn => {
-      if (!loggedIn) {
-        this.error = true
-      } else {
-        this.$router.replace(this.$route.query.redirect || '/')
-      }
-    });
-  }
+  // login() {
+  //   auth.login(this.email, this.pass, loggedIn => {
+  //     if (!loggedIn) {
+  //       this.error = true
+  //     } else {
+  //       this.$router.replace(this.$route.query.redirect || '/')
+  //     }
+  //   });
+  // }
 
   googleAuth(): void {
     console.log("googleAuth > start");
@@ -85,13 +85,13 @@ export default class Login extends Vue {
       if (result.credential) {
         // This gives you a Google Access Token.
         let token = result.credential.accessToken;
+        auth.onChange(true);
         firebaseDB.ref("Users/" + firebaseAuth.currentUser.uid).update({
           username: result.user.displayName,
           email: result.user.email,
           photo: result.user.photoURL
         });
       }
-      let user = result.user; 
     });
 
     // Start a sign in process for an unauthenticated user.
